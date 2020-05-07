@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <input type="number" maxlength="8" id="input" class="form-control" placeholder="Enter a number" onchange="printNumber(this)">
+            </div> 
+        </div>
+        <div class="row">
+            <div class="col">
+                <h4 id="output"></h4>
+            </div>
+        </div>
+    </div>
+    <script>
+        function printNumber(element){
+            digits = ((element.value).split(""));
+            console.log(digits);
+            console.log(digits.length);
+            document.getElementById("output").innerHTML = convert(parseInt(element.value))+" only"
+        }
+        var ones = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+        var tens = ['', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+        var teens = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+
+function convert_lakhs(num) {
+  if (num >= 100000) {
+    return convert_lakhs(Math.floor(num / 100000)) + " lakh " + convert_thousands(num % 100000);
+  } else {
+    return convert_thousands(num);
+  }
+}
+
+function convert_thousands(num) {
+  if (num >= 1000) {
+    return convert_hundreds(Math.floor(num / 1000)) + " thousand " + convert_hundreds(num % 1000);
+  } else {
+    return convert_hundreds(num);
+  }
+}
+
+function convert_hundreds(num) {
+  if (num > 99) {
+    return ones[Math.floor(num / 100)] + " hundred " + convert_tens(num % 100);
+  } else {
+    return convert_tens(num);
+  }
+}
+
+function convert_tens(num) {
+  if (num < 10) return ones[num];
+  else if (num >= 10 && num < 20) return teens[num - 10];
+  else {
+    return tens[Math.floor(num / 10)] + " " + ones[num % 10];
+  }
+}
+
+function convert(num) {
+  if (num == 0) return "zero";
+  else return convert_lakhs(num);
+}
+    </script>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</html>
